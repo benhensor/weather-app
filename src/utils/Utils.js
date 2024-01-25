@@ -14,7 +14,6 @@ export const Images = (path) => {
         case 'Sun': return 'wi-day-sunny' 
         case 'Celsius': return 'wi-celsius' 
         case 'Fahrenheit': return 'wi-fahrenheit' 
-        case 'Degrees': return 'wi-degrees' 
         default: return null
     }
 }

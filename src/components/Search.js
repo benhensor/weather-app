@@ -19,8 +19,7 @@ const SearchContainer = styled.div`
 `
 
 const SearchInput = styled.input`
-    min-width: 20rem;
-    width: 100%;
+    width: 12em;
     border: 1px solid #ffffff25;
     border-radius: 0.5rem;
     padding: 0.5em 1em;
@@ -132,10 +131,10 @@ function Search({ setQuery, units, setUnits }) {
 
                 <SearchIcons className='search-location-icons-container'>
                     <SearchButton onClick={handleSearchClick}>
-                        <FaSearch style={{ color: '#FFFFFF', fontSize: '1.5em', marginRight: '0.5em' }} />
+                        <FaSearch style={{ color: '#FFFFFF', fontSize: '1.3em', marginRight: '0.5em' }} />
                     </SearchButton>
                     <SearchButton onClick={handleLocationClick}>
-                        <FaLocationDot style={{ color: '#FFFFFF', fontSize: '1.5em' }} />
+                        <FaLocationDot style={{ color: '#FFFFFF', fontSize: '1.3em' }} />
                     </SearchButton>
                 </SearchIcons>
             </SearchContainer>

@@ -3,6 +3,9 @@ import styled from 'styled-components'
 import 'weather-icons/css/weather-icons.min.css';
 import * as d3 from 'd3'
 import { formatToLocalTime, Images, mapOWNIconToWeatherIcons } from '../utils/Utils'
+import { ReactComponent as UpArrow } from '../assets/wi-direction-up.svg'
+import { ReactComponent as DownArrow } from '../assets/wi-direction-down.svg'
+import { ReactComponent as Humidity } from '../assets/wi-humidity.svg'
 
 
 const StyledCurrentWeather = styled.section`
@@ -27,7 +30,7 @@ const CurrentConditions = styled.div`
 
 const Location = styled.p`
     position: absolute;
-    top: 1em;
+    top: 0.5em;
     left: 0.5em;
     font-size: 2.6rem;
     color: #fff;
@@ -35,13 +38,11 @@ const Location = styled.p`
 
 const DateAndTime = styled.p`
     position: absolute;
-    top: 1em;
-    right: 1em;
+    top: 50%;
+    left: 1em;
     color: #fff;
 	font-size: 0.7em;
 	width: 100%;
-	height: 100%;
-	text-align: right;
 `
 
 const Display = styled.div`
@@ -66,8 +67,8 @@ const Conditions = styled.div`
     height: 100%; 
     p {
         position: absolute;
-        top: 1em;
-        left: 0;
+        top: 1.5em;
+        left: 1em;
         font-size: 2.6rem;
         color: ${props => props.$bgColor};
     }
