@@ -2,10 +2,13 @@ import React, { useEffect, useState }  from 'react'
 import styled from 'styled-components'
 import 'weather-icons/css/weather-icons.min.css';
 import * as d3 from 'd3'
-import { formatToLocalTime, Images, mapOWNIconToWeatherIcons } from '../utils/Utils'
+import { formatToLocalTime, mapOWNIconToWeatherIcons } from '../utils/Utils'
 import { ReactComponent as UpArrow } from '../assets/wi-direction-up.svg'
-import { ReactComponent as DownArrow } from '../assets/wi-direction-down.svg'
 import { ReactComponent as Humidity } from '../assets/wi-humidity.svg'
+import { ReactComponent as Wind } from '../assets/wi-strong-wind.svg'
+import { ReactComponent as Sunrise } from '../assets/wi-sunrise.svg'
+import { ReactComponent as Sunset } from '../assets/wi-sunset.svg'
+import { ReactComponent as Thermometer } from '../assets/wi-thermometer.svg'
 
 
 const StyledCurrentWeather = styled.section`
@@ -38,7 +41,7 @@ const Location = styled.p`
 
 const DateAndTime = styled.p`
     position: absolute;
-    top: 50%;
+    bottom: 1em;
     left: 1em;
     color: #fff;
 	font-size: 0.7em;
@@ -62,7 +65,7 @@ const Conditions = styled.div`
     align-items: flex-start;
     position: relative;
     margin-top: 2em;
-    margin-left: 5%;
+    margin-left: 2%;
     z-index: 1;
     height: 100%; 
     p {
@@ -94,17 +97,6 @@ const Temperature = styled.div`
         color: #333;
     
     }
-`
-
-const CurrentConditionsIcon = styled.i`
-    font-size: 1.5em;
-    color: #fff;
-    width: 1em;
-    height: 1em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 0.2em;
 `
 
 const WeatherIcon = styled.i`
@@ -164,10 +156,10 @@ function CurrentWeather({ weather, units, weather: { details, icon, temp, temp_m
         <StyledCurrentWeather>
             <CurrentConditions>
                 <Location>{`${name}, ${country}`}</Location>
-                <DateAndTime>
-                    {formatToLocalTime(weather.dt, weather.timezone)}
-                </DateAndTime>
                 <Display >
+                    <DateAndTime>
+                        {formatToLocalTime(weather.dt, weather.timezone)}
+                    </DateAndTime>
                     <Conditions $bgColor={bgColor}>
                         <p >{details}</p>
                         <WeatherIcon className={`wi ${WeatherIconClass}`}  />
@@ -179,33 +171,33 @@ function CurrentWeather({ weather, units, weather: { details, icon, temp, temp_m
                 <Details>
                 <DetailRow>
                     <DetailBlock>
-                        <CurrentConditionsIcon className={`wi ${Images('Thermometer')}`}  />
+                        <Thermometer style={{ fill: '#fff', width: '3em' }} />
                         <p>Real feel:<br/><span className='current-value'>{`${feels_like.toFixed()}°`}</span></p>
                     </DetailBlock>
                     <DetailBlock>
-                        <CurrentConditionsIcon className={`wi ${Images('Humidity')}`}  />
+                        <Humidity style={{ fill: '#fff', width: '3em' }} />
                         <p>Humidity:<br/><span className='current-value'>{`${humidity.toFixed()}%`}</span></p>
                     </DetailBlock>
                     <DetailBlock>
-                        <CurrentConditionsIcon className={`wi ${Images('Wind')}`}  />
+                        <Wind style={{ fill: '#fff', width: '3em' }} />
                         <p>Wind:<br/><span className='current-value'>{`${speed.toFixed()} km/h`}</span></p>
                     </DetailBlock>
                 </DetailRow>
                 <DetailRow>
                     <DetailBlock>
-                        <CurrentConditionsIcon className={`wi ${Images('Sunrise')}`}  />
+                        <Sunrise style={{ fill: '#fff', width: '3em' }} />
                         <p>Sunrise:<br/><span>{formatToLocalTime(sunrise, timezone, 'HH:mm a')}</span></p>
                     </DetailBlock>       
                     <DetailBlock>
-                        <CurrentConditionsIcon className={`wi ${Images('Sunset')}`}  />
+                        <Sunset style={{ fill: '#fff', width: '3em' }}  />
                         <p>Sunset:<br/><span className='current-value'>{formatToLocalTime(sunset, timezone, 'HH:mm a')}</span></p>
                     </DetailBlock>            
                     <DetailBlock>
-                        <CurrentConditionsIcon className={`wi ${Images('UpArrow')}`}  />
+                        <UpArrow style={{ fill: '#fff', width: '3em' }} />
                         <p>High:<br/><span>{`${temp_max.toFixed()}°`}</span></p>
                     </DetailBlock>          
                     <DetailBlock>
-                        <CurrentConditionsIcon className={`wi ${Images('DownArrow')}`}  />
+                        <UpArrow style={{ fill: '#fff', width: '3em', rotate: '180deg' }} />
                         <p>Low:<br/><span>{`${temp_min.toFixed()}°`}</span></p>
                     </DetailBlock>
                 </DetailRow>

@@ -2,22 +2,6 @@ import { DateTime } from 'luxon'
 
 export const formatToLocalTime = (secs, zone, format = "cccc, dd LLL yyyy' | 'H:mm a") => DateTime.fromSeconds(secs).setZone(zone).toFormat(format);
 
-export const Images = (path) => {
-    switch (path) {
-        case 'DownArrow': return 'wi-direction-down' 
-        case 'UpArrow': return 'wi-direction-up' 
-        case 'Sunrise': return 'wi-sunrise' 
-        case 'Sunset': return 'wi-sunset' 
-        case 'Humidity': return 'wi-humidity' 
-        case 'Wind': return 'wi-strong-wind' 
-        case 'Thermometer': return 'wi-thermometer' 
-        case 'Sun': return 'wi-day-sunny' 
-        case 'Celsius': return 'wi-celsius' 
-        case 'Fahrenheit': return 'wi-fahrenheit' 
-        default: return null
-    }
-}
-
 export const mapOWNIconToWeatherIcons = (icon) => {
     switch (icon) {
         
