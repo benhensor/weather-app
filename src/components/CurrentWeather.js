@@ -69,7 +69,7 @@ const Conditions = styled.div`
     height: 100%; 
     p {
         position: absolute;
-        top: 1.5em;
+        top: 0.5em;
         left: 1em;
         font-size: 2.6rem;
         color: ${props => props.$bgColor};
@@ -94,15 +94,14 @@ const Temperature = styled.div`
     box-shadow: 0.2em 0.2em 0.1em #00000050;
     p {
         color: #333;
-    
     }
 `
 
 const WeatherIcon = styled.i`
     font-size: 7em;
     color: #fff;
-    margin-top: 0.5em;
-    margin-left: 0.35em;
+    margin-top: 0.3em;
+    margin-left: 0.4em;
 `
 
 const Details = styled.div`
@@ -164,7 +163,7 @@ function CurrentWeather({ weather, units, weather: { details, icon, temp, temp_m
                         <WeatherIcon className={`wi ${WeatherIconClass}`}  />
                     </Conditions>
                     <Temperature $bgColor={bgColor}>
-                        <p>{`${temp.toFixed()}°`}</p>
+                        <p>{`${temp.toFixed()}`}<span>˚</span></p>
                     </Temperature>
                 </Display>
                 <Details>

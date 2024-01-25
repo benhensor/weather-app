@@ -9,6 +9,7 @@ const StyledSearch = styled.section`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 0.5em;
     padding: 0.5em;
     background-color: #77777775;
     border-radius: 1rem;
