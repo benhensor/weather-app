@@ -65,7 +65,6 @@ const Conditions = styled.div`
     align-items: flex-start;
     position: relative;
     margin-top: 2em;
-    margin-left: 2%;
     z-index: 1;
     height: 100%; 
     p {
@@ -103,7 +102,7 @@ const WeatherIcon = styled.i`
     font-size: 7em;
     color: #fff;
     margin-top: 0.5em;
-    margin-left: 0.5em;
+    margin-left: 0.35em;
 `
 
 const Details = styled.div`
