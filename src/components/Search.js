@@ -2,14 +2,11 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { FaSearch } from 'react-icons/fa'
 import { FaLocationDot } from 'react-icons/fa6'
-import { ReactComponent as Celsius } from '../assets/wi-celsius.svg'
-import { ReactComponent as Fahrenheit } from '../assets/wi-fahrenheit.svg'
 
 const StyledSearch = styled.section`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 0.5em;
     padding: 0.5em;
     background-color: #77777775;
     border-radius: 1rem;
@@ -60,29 +57,37 @@ const TempControls = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
+    height: 100%;
+    button {
+        border: none;
+        background: none;
+        color: #ffffff75;
+        font-size: 3rem;
+        height: 100%;
+        cursor: pointer;
+        &.unit-metric {
+            margin-right: 0.5rem;
+        }
+        &.unit-imperial {
+            margin-left: 0.5rem;
+
+        }
+    }
     p {
-        position: absolute;
-        right: 1.3em;
         color: #fff;
-        font-size: 1.5em;
+        font-size: 1.5rem;
+        font-weight: 300;
+        margin: 0 0.75rem;
+        height: 100%;
+        text-align: start;
+        padding-bottom: 8px;
+
     }
 `
 
-const StyledCelsius = styled(Celsius)`
-    position: absolute;
-    right: 2em;
-  fill: #fff; 
-  height: 3em; 
-  cursor: pointer;
-`
-
-const StyledFahrenheit = styled(Fahrenheit)`
-    position: absolute;
-    right: -0.5em;
-  fill: #fff; 
-  height: 3em; 
-  cursor: pointer;
+const TempIcon = styled.i`
+    font-size: 3rem;
+    color: #fff;
 `
 
 
@@ -117,6 +122,7 @@ function Search({ setQuery, units, setUnits }) {
         <StyledSearch>
             <SearchContainer>
                 <SearchInput
+                    className='search-input'
                     value={city} 
                     onChange={(e) => setCity(e.target.value)}
                     type='text'
@@ -124,7 +130,7 @@ function Search({ setQuery, units, setUnits }) {
                     onKeyDown={(e) => {e.key === 'Enter' && handleSearchClick()}}
                 />
 
-                <SearchIcons>
+                <SearchIcons className='search-location-icons-container'>
                     <SearchButton onClick={handleSearchClick}>
                         <FaSearch style={{ color: '#FFFFFF', fontSize: '1.3em', marginRight: '0.5em' }} />
                     </SearchButton>
@@ -135,14 +141,21 @@ function Search({ setQuery, units, setUnits }) {
             </SearchContainer>
 
             <TempControls>
-                <StyledCelsius 
+                <button 
                     name='metric' 
-                    onClick={() => handleUnitsChange}
-                />
+                    className='unit-metric'
+                    onClick={handleUnitsChange}
+                >
+                    <TempIcon className='wi wi-celsius'></TempIcon>
+                </button>
                 <p className='unit-divider'>|</p>
-                <StyledFahrenheit 
+                <button 
                     name='imperial' 
-                    onClick={() => handleUnitsChange}/>
+                    className='unit-imperial'
+                    onClick={handleUnitsChange}
+                >
+                    <TempIcon className='wi wi-fahrenheit'></TempIcon>
+                </button>
             </TempControls>
         </StyledSearch>
     )
