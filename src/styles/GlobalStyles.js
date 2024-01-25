@@ -18,7 +18,7 @@ const GlobalStyles = createGlobalStyle`
         font-family: 'Poppins', sans-serif;
         font-size: 1.6rem;
         width: 100%;
-        height: 100%;
+        height: 100vh;
         background: linear-gradient(
 		to right bottom,
 		#303030,
