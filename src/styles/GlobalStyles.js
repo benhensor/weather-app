@@ -12,6 +12,12 @@ const GlobalStyles = createGlobalStyle`
         font-size: 62.5%;
         width: 100svw;
         height: 100svh;
+        overflow: hidden;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
 
     body {

@@ -21,11 +21,12 @@ const Buttons = styled.div`
   align-items: center;
   width: 100%;
   margin-bottom: 1em;
+  gap: 1em;
   button {
     border: none;
     background: none;
     color: #fff;
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     padding: 0.5em 1em;
     border-radius: 0.5rem;
     cursor: pointer;

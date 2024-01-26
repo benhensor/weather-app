@@ -10,15 +10,18 @@ const StyledSearch = styled.section`
     padding: 0.5em;
     background-color: #77777775;
     border-radius: 1rem;
+    margin-top: 0.5em;
 `
 
 const SearchContainer = styled.div`
     display: flex;
     align-items: center;
+    width: 100%;
 `
 
 const SearchInput = styled.input`
-    width: 12em;
+    min-width: 10em;
+    width: 65%;
     border: 1px solid #ffffff25;
     border-radius: 0.5rem;
     padding: 0.5em 1em;
@@ -27,6 +30,7 @@ const SearchInput = styled.input`
     background: none;
     font-size: 1.6rem;
     margin-right: 1em;
+    position: relative;
     &::placeholder {
         color: #aaa;
         font-size: 1.6rem;
@@ -34,6 +38,15 @@ const SearchInput = styled.input`
     &:focus {
         outline: none;
         border: 1px solid #ffffff25;
+    }
+    &::before {
+        content: "${props => props.errorMessage}";
+        color: red;
+        position: absolute;
+        top: 0;
+        left: 100%;
+        padding: 0.5em 1em;
+        font-size: 1.2rem;
     }
 `
 
@@ -53,58 +66,16 @@ const SearchButton = styled.button`
     }
 `
 
-const TempControls = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    button {
-        border: none;
-        background: none;
-        color: #ffffff75;
-        font-size: 3rem;
-        height: 100%;
-        cursor: pointer;
-        &.unit-metric {
-            margin-right: 0.5rem;
-        }
-        &.unit-imperial {
-            margin-left: 0.5rem;
-
-        }
-    }
-    p {
-        color: #fff;
-        font-size: 1.5rem;
-        font-weight: 300;
-        margin: 0 0.75rem;
-        height: 100%;
-        text-align: start;
-        padding-bottom: 8px;
-
-    }
-`
-
-const TempIcon = styled.i`
-    font-size: 3rem;
-    color: #fff;
-`
-
-
-
-function Search({ setQuery, units, setUnits }) {
+export default function Search({ setQuery, error }) {
 
     const [city, setCity] = useState('')
-    const [selectedUnit, setSelectedUnit] = useState('metric')
-
-    const handleUnitsChange = (e) => {
-        setSelectedUnit(e.currentTarget.name)
-        if (units !== selectedUnit) setUnits(selectedUnit)
-    }
 
     const handleSearchClick = () => {
-        if (city !== '') setQuery({ q: city })
-        setCity('')
+        const trimmedInput = city.trim()
+        if (trimmedInput) {
+            setQuery({ q: city })
+            setCity('')
+        } 
     }
 
     const handleLocationClick = () => {
@@ -114,51 +85,39 @@ function Search({ setQuery, units, setUnits }) {
             let lat = position.coords.latitude
             let lon = position.coords.longitude
             setQuery({ lat, lon })
-        })
+        },
+        (error) => {
+            console.log(error)
         }
+    )} else {
+        console.log('Geolocation is not supported by this browser.')
     }
+    }
+
 
     return (
         <StyledSearch>
             <SearchContainer>
                 <SearchInput
-                    className='search-input'
+                    id='search-input'
                     value={city} 
                     onChange={(e) => setCity(e.target.value)}
                     type='text'
-                    placeholder='Search' 
+                    $errorMessage={error}
+                    placeholder="Search..."
+                    required
                     onKeyDown={(e) => {e.key === 'Enter' && handleSearchClick()}}
                 />
 
                 <SearchIcons className='search-location-icons-container'>
-                    <SearchButton onClick={handleSearchClick}>
-                        <FaSearch style={{ color: '#FFFFFF', fontSize: '1.3em', marginRight: '0.5em' }} />
+                    <SearchButton onClick={handleSearchClick} aria-label='Search-location'>
+                        <FaSearch style={{ color: '#FFFFFF', fontSize: '1.5em', marginRight: '0.75em' }} />
                     </SearchButton>
-                    <SearchButton onClick={handleLocationClick}>
-                        <FaLocationDot style={{ color: '#FFFFFF', fontSize: '1.3em' }} />
+                    <SearchButton onClick={handleLocationClick} aria-label='Use Current Location'>
+                        <FaLocationDot style={{ color: '#FFFFFF', fontSize: '1.5em' }} />
                     </SearchButton>
                 </SearchIcons>
             </SearchContainer>
-
-            <TempControls>
-                <button 
-                    name='metric' 
-                    className='unit-metric'
-                    onClick={handleUnitsChange}
-                >
-                    <TempIcon className='wi wi-celsius'></TempIcon>
-                </button>
-                <p className='unit-divider'>|</p>
-                <button 
-                    name='imperial' 
-                    className='unit-imperial'
-                    onClick={handleUnitsChange}
-                >
-                    <TempIcon className='wi wi-fahrenheit'></TempIcon>
-                </button>
-            </TempControls>
         </StyledSearch>
     )
 }
-
-export default Search;

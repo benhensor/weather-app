@@ -10,7 +10,7 @@ export const formatWeather = ({
 	wind: { speed },
 }) => {
 	const { main: details, icon } = weather[0]
-	const { temp, feels_like, temp_min, temp_max, humidity } = main
+	const { temp, feels_like, temp_min, temp_max, humidity, pressure } = main
 
 	return {
 		lat,
@@ -20,6 +20,7 @@ export const formatWeather = ({
 		temp_min,
 		temp_max,
 		humidity,
+		pressure,
 		name,
 		dt,
 		country,

@@ -9,6 +9,7 @@ import { ReactComponent as Wind } from '../assets/wi-strong-wind.svg'
 import { ReactComponent as Sunrise } from '../assets/wi-sunrise.svg'
 import { ReactComponent as Sunset } from '../assets/wi-sunset.svg'
 import { ReactComponent as Thermometer } from '../assets/wi-thermometer.svg'
+import { ReactComponent as Barometer } from '../assets/wi-barometer.svg'
 
 
 const StyledCurrentWeather = styled.section`
@@ -79,7 +80,7 @@ const Conditions = styled.div`
 const Temperature = styled.div`
     position: absolute;
     top: 50%;
-    transform: translateY(-40%);
+    transform: translateY(-50%);
     right: 3%;
     z-index: 0;
     display: flex;
@@ -89,18 +90,43 @@ const Temperature = styled.div`
     font-weight: 300;
     background-color: ${props => props.$bgColor};
     border-radius: 50%;
-    width: 2.7em;
-    height: 2.7em;
+    width: 2.5em;
+    height: 2.5em;
     box-shadow: 0.2em 0.2em 0.1em #00000050;
     p {
         color: #333;
     }
 `
 
+const TempControls = styled.div`
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        background: #777;
+        padding: 0.5em;
+        border-radius: 50%;
+        color: #ffffff;
+        width: 2.5em;
+        height: 2.5em;
+        cursor: pointer;
+        
+    }
+`
+
+const TempIcon = styled.i`
+    font-size: 3rem;
+    color: #fff;
+`
+
 const WeatherIcon = styled.i`
     font-size: 7em;
     color: #fff;
-    margin-top: 0.3em;
+    margin-top: 0.5em;
     margin-left: 0.4em;
 `
 
@@ -135,20 +161,38 @@ const DetailBlock = styled.div`
     }
 `
 
-function CurrentWeather({ weather, units, weather: { details, icon, temp, temp_min, temp_max, sunrise, sunset, speed, humidity, dt, feels_like, timezone, name, country }}) {
+const createUnifiedTemperatureScale = () => {
+    const celsiusRange = [-10, 0, 10, 15, 20, 25, 30, 35, 40]
+    const colorRange = ['#4a90e2', '#7fb3d5', '#e4f5ff', '#f7dc6f', '#eb984e', '#f25a14', '#cb4335']
+    return d3.scaleLinear().domain(celsiusRange).range(colorRange)
+}
 
-    const [bgColor, setBgColor] = useState('#e4f5ff')
+const getBackgroundColor = (temp, scale) => {
+    return scale(temp)
+}
+
+export default function CurrentWeather({ weather, units, setUnits, weather: { details, icon, temp, temp_min, temp_max, sunrise, sunset, speed, humidity, pressure, feels_like, timezone, name, country }}) {
+
+    const scale = createUnifiedTemperatureScale()
+    const tempInCelsius = units === 'imperial' ? (temp - 32) * 5 / 9 : temp;
+    const [bgColor, setBgColor] = useState(getBackgroundColor(temp, scale))
+    const [selectedUnit, setSelectedUnit] = useState('metric')
 
     const WeatherIconClass = mapOWNIconToWeatherIcons(icon)
 
     useEffect(() => {
-        const celsiusRange = [-10, 0, 10, 20, 30, 40, 50]
-        const fahrenheitRange = [-50, 32, 50, 68, 86, 104, 122]
-        const colorRange = units === 'metric'
-        ?  d3.scaleLinear().domain(celsiusRange).range(['#e4f5ff', '#98f3ff', '#00dffd', '#00d0aa', '#ffd500', '#f25a14', '#b00000'])
-        : d3.scaleLinear().domain(fahrenheitRange).range(['#e4f5ff', '#98f3ff', '#00dffd', '#00d0aa', '#ffd500', '#f25a14', '#b00000'])
-        setBgColor(colorRange(temp))
-    }, [units, temp])
+        setBgColor(getBackgroundColor(tempInCelsius, scale))
+    }, [tempInCelsius, scale])
+
+    
+    // Toggle selected units between metric and imperial
+    const handleUnitsChange = () => {
+        const newUnits = units === 'metric' ? 'imperial' : 'metric'
+        setUnits(newUnits)
+        setSelectedUnit(newUnits)        
+    }
+    
+    
 
     return (
         <StyledCurrentWeather>
@@ -165,6 +209,25 @@ function CurrentWeather({ weather, units, weather: { details, icon, temp, temp_m
                     <Temperature $bgColor={bgColor}>
                         <p>{`${temp.toFixed()}`}<span>˚</span></p>
                     </Temperature>
+                    <TempControls>
+                        {selectedUnit === 'metric' ? (
+                            <button 
+                            name='metric' 
+                            className='unit-metric'
+                            onClick={handleUnitsChange}
+                        >
+                            <TempIcon className='wi wi-celsius'></TempIcon>
+                        </button>
+                        ) : (
+                            <button 
+                            name='imperial' 
+                            className='unit-imperial'
+                            onClick={handleUnitsChange}
+                        >
+                            <TempIcon className='wi wi-fahrenheit'></TempIcon>
+                        </button>
+                        )}                      
+                    </TempControls>
                 </Display>
                 <Details>
                 <DetailRow>
@@ -179,6 +242,10 @@ function CurrentWeather({ weather, units, weather: { details, icon, temp, temp_m
                     <DetailBlock>
                         <Wind style={{ fill: '#fff', width: '3em' }} />
                         <p>Wind:<br/><span className='current-value'>{`${speed.toFixed()} km/h`}</span></p>
+                    </DetailBlock>
+                    <DetailBlock>
+                        <Barometer style={{ fill: '#fff', width: '3em' }} />
+                        <p>Pressure:<br/><span className='current-value'>{`${pressure} mb`}</span></p>
                     </DetailBlock>
                 </DetailRow>
                 <DetailRow>
@@ -204,5 +271,3 @@ function CurrentWeather({ weather, units, weather: { details, icon, temp, temp_m
         </StyledCurrentWeather>
     )
 }
-
-export default CurrentWeather

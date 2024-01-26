@@ -30,6 +30,7 @@ function App() {
 	const [query, setQuery] = useState({ q: 'London' })
 	const [units, setUnits] = useState('metric')
 	const [weather, setWeather] = useState(null)
+	const [error, setError] = useState(null)
 
 	useEffect(() => {
 		navigator.geolocation.getCurrentPosition(
@@ -46,22 +47,26 @@ function App() {
 
 	useEffect(() => {
 		const fetchWeather = async () => {
-			// const message = query.q ? query.q : 'current location.';
-
-			await getFormattedWeatherData({ ...query, units }).then((data) => {
+			try {
+				const data = await getFormattedWeatherData({ ...query, units })
 				setWeather(data)
-			})
+				setError(null)
+			} catch (error) {
+				console.log(error)
+				setError('Invalid search')
+			}
 		}
 		fetchWeather()
 	}, [query, units])
 
-	if (!weather) return null // Return null if weather prop is not available
+
+	if (!weather) return null
 
 	return (
 		<Main>
 			<Container>
-				<Search weather={weather} setQuery={setQuery} units={units} setUnits={setUnits} />
-				<CurrentWeather weather={weather} units={units} />
+				<Search weather={weather} setQuery={setQuery} units={units} error={error}/>
+				<CurrentWeather weather={weather} units={units} setUnits={setUnits} />
 				<Forecast hourly={weather.hourly} daily={weather.daily} />
 			</Container>
 		</Main>
