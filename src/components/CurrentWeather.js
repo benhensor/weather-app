@@ -1,6 +1,6 @@
 import React, { useEffect, useState }  from 'react'
 import styled from 'styled-components'
-import 'weather-icons/css/weather-icons.min.css';
+import 'weather-icons/css/weather-icons.min.css'
 import * as d3 from 'd3'
 import { formatToLocalTime, mapOWNIconToWeatherIcons } from '../utils/Utils'
 import { ReactComponent as UpArrow } from '../assets/wi-direction-up.svg'
@@ -171,26 +171,30 @@ const getBackgroundColor = (temp, scale) => {
     return scale(temp)
 }
 
-export default function CurrentWeather({ weather, units, setUnits, weather: { details, icon, temp, temp_min, temp_max, sunrise, sunset, speed, humidity, pressure, feels_like, timezone, name, country }}) {
+export default function CurrentWeather({ weather: { details, icon, temp, temp_min, temp_max, sunrise, sunset, speed, humidity, dt, pressure, feels_like, timezone, name, country }}) {
 
     const scale = createUnifiedTemperatureScale()
-    const tempInCelsius = units === 'imperial' ? (temp - 32) * 5 / 9 : temp;
     const [bgColor, setBgColor] = useState(getBackgroundColor(temp, scale))
+    const [temperature, setTemperature] = useState(null)
     const [selectedUnit, setSelectedUnit] = useState('metric')
 
     const WeatherIconClass = mapOWNIconToWeatherIcons(icon)
 
     useEffect(() => {
-        setBgColor(getBackgroundColor(tempInCelsius, scale))
-    }, [tempInCelsius, scale])
+        setBgColor(getBackgroundColor(temp, scale))
+        updateTemperatureDisplay(temp)
+    }, [temp, scale])
 
-    
-    // Toggle selected units between metric and imperial
-    const handleUnitsChange = () => {
-        const newUnits = units === 'metric' ? 'imperial' : 'metric'
-        setUnits(newUnits)
-        setSelectedUnit(newUnits)        
+    const updateTemperatureDisplay = (tempCelsius) => {
+        const tempFahrenheit = (tempCelsius * 9/5 + 32).toFixed()
+        setTemperature(selectedUnit === 'metric' ? tempCelsius.toFixed() : tempFahrenheit)
     }
+
+    const handleUnitsChange = () => {
+        setSelectedUnit(prevUnit => prevUnit === 'metric' ? 'imperial' : 'metric')
+    }
+
+   
     
     
 
@@ -200,18 +204,19 @@ export default function CurrentWeather({ weather, units, setUnits, weather: { de
                 <Location>{`${name}, ${country}`}</Location>
                 <Display >
                     <DateAndTime>
-                        {formatToLocalTime(weather.dt, weather.timezone)}
+                        {formatToLocalTime(dt, timezone)}
                     </DateAndTime>
                     <Conditions $bgColor={bgColor}>
                         <p >{details}</p>
                         <WeatherIcon className={`wi ${WeatherIconClass}`}  />
                     </Conditions>
                     <Temperature $bgColor={bgColor}>
-                        <p>{`${temp.toFixed()}`}<span>˚</span></p>
+                        <p>{temperature}<span>˚</span></p>
                     </Temperature>
                     <TempControls>
                         {selectedUnit === 'metric' ? (
-                            <button 
+                            <button
+                            aria-label='metric' 
                             name='metric' 
                             className='unit-metric'
                             onClick={handleUnitsChange}
@@ -220,6 +225,7 @@ export default function CurrentWeather({ weather, units, setUnits, weather: { de
                         </button>
                         ) : (
                             <button 
+                            aria-label='imperial'
                             name='imperial' 
                             className='unit-imperial'
                             onClick={handleUnitsChange}

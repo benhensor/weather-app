@@ -65,7 +65,7 @@ function App() {
 	return (
 		<Main>
 			<Container>
-				<Search weather={weather} setQuery={setQuery} units={units} error={error}/>
+				<Search weather={weather} setQuery={setQuery} error={error}/>
 				<CurrentWeather weather={weather} units={units} setUnits={setUnits} />
 				<Forecast hourly={weather.hourly} daily={weather.daily} />
 			</Container>

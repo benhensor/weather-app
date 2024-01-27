@@ -21,7 +21,7 @@ const Buttons = styled.div`
   align-items: center;
   width: 100%;
   margin-bottom: 1em;
-  gap: 1em;
+  gap: 0.5em;
   button {
     border: none;
     background: none;

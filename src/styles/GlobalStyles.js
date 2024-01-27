@@ -2,6 +2,10 @@ import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyles = createGlobalStyle`
 
+    :root {
+        font-size: 62.5%;
+    }
+
     *, *::before, *::after {
         margin: 0;
         padding: 0;
@@ -9,7 +13,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     html {
-        font-size: 62.5%;
+        font-size: 1.6rem;
         width: 100svw;
         height: 100svh;
         overflow: hidden;
