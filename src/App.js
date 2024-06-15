@@ -1,29 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
 import getFormattedWeatherData from './utils/WeatherService'
 import Forecast from './components/Forecast'
 import CurrentWeather from './components/CurrentWeather'
 import Search from './components/Search'
-
-const Main = styled.main`
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-	margin: 0 auto;
-`
-
-const Container = styled.div`
-	max-width: 546px;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	gap: 0.5em;
-	padding: 0 0.5em;
-`
+import { Main, Container } from './styles/AppStyles'
 
 function App() {
 
