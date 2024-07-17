@@ -7,7 +7,6 @@ const StyledSearch = styled.section`
     padding: 0.5em;
     background-color: #77777775;
     border-radius: 1rem;
-    margin-top: 0.5em;
 `
 
 const SearchContainer = styled.div`
