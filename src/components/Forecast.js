@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import Hourly from './Hourly'
 import Daily from './Daily'
-import Footer from './Footer'
-import { StyledForecast, Buttons, ForecastContainer } from '../styles/ForecastStyles'
+import { StyledForecast, Header, Heading, Buttons, ForecastContainer } from '../styles/ForecastStyles'
 
 
 const Forecast = ({ hourly, daily }) => {
@@ -18,24 +17,27 @@ const Forecast = ({ hourly, daily }) => {
 
   return (
     <StyledForecast>
-      <Buttons>
-        <button
-          className={`forecast-selector-button ${forecastSelector ? 'selected' : ''}`}
-          value='hourly'
-          onClick={handleForecastChange}
-          disabled={forecastSelector}
-        >
-          Hourly
-        </button>
-        <button
-          className={`forecast-selector-button ${!forecastSelector ? 'selected' : ''}`}
-          value='daily'
-          onClick={handleForecastChange}
-          disabled={!forecastSelector}
-        >
-          Daily
-        </button>
-      </Buttons>
+      <Header>
+        <Heading>Forecast</Heading>
+        <Buttons>
+          <button
+            className={`forecast-selector-button ${forecastSelector ? 'selected' : ''}`}
+            value='hourly'
+            onClick={handleForecastChange}
+            disabled={forecastSelector}
+          >
+            Hourly
+          </button>
+          <button
+            className={`forecast-selector-button ${!forecastSelector ? 'selected' : ''}`}
+            value='daily'
+            onClick={handleForecastChange}
+            disabled={!forecastSelector}
+          >
+            Daily
+          </button>
+        </Buttons>
+      </Header>
       <ForecastContainer>
       {forecastSelector ? (
         <Hourly hourly={hourly} />
@@ -43,7 +45,6 @@ const Forecast = ({ hourly, daily }) => {
         <Daily daily={daily} />
       )}
       </ForecastContainer>
-      <Footer />
     </StyledForecast>
   )
 }

@@ -6,8 +6,8 @@ const DailyForecast = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-top: 1px solid #ffffff25;
-    border-bottom: 1px solid #ffffff25;
+    background-color: #77777775;
+    border-radius: .5em;
 `
 
 const DailyForecastContainer = styled.div`

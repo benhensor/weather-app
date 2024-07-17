@@ -8,7 +8,23 @@ const StyledForecast = styled.section`
   position: relative;
   background-color: #77777775;
   border-radius: 1rem;
-  padding: 1em 0.5em;
+  padding: 0.5em;
+`
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: .5em;
+  background-color: #77777775;
+  border-radius: .5em;
+  padding: 0.5em;
+`
+
+const Heading = styled.p`
+  font-size: 2rem;
+  color: #fff;
 `
 
 const Buttons = styled.div`
@@ -16,7 +32,6 @@ const Buttons = styled.div`
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  margin-bottom: 1em;
   gap: 0.5em;
   button {
     border: none;
@@ -43,4 +58,4 @@ const ForecastContainer = styled.div`
   width: 100%;
 `
 
-export { StyledForecast, Buttons, ForecastContainer }
+export { StyledForecast, Header, Heading, Buttons, ForecastContainer }

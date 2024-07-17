@@ -4,6 +4,8 @@ const APICount = styled.footer`
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #77777775;
+    border-radius: 1rem;
 	font-size: 0.7em;
 	width: 100%;
 	height: 100%;

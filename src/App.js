@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import getFormattedWeatherData from './utils/WeatherService'
+import Footer from './components/Footer'
 import Forecast from './components/Forecast'
 import CurrentWeather from './components/CurrentWeather'
 import Search from './components/Search'
@@ -48,6 +49,7 @@ function App() {
 				<Search weather={weather} setQuery={setQuery} error={error}/>
 				<CurrentWeather weather={weather} units={units} setUnits={setUnits} />
 				<Forecast hourly={weather.hourly} daily={weather.daily} />
+				<Footer />
 			</Container>
 		</Main>
 	)

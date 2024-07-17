@@ -6,8 +6,8 @@ const HourlyForecast = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-top: 1px solid #ffffff25;
-    border-bottom: 1px solid #ffffff25;
+    background-color: #77777775;
+    border-radius: .5em;
     div {
     }
     p {
@@ -19,7 +19,6 @@ const HourlyForecastContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     align-items: center;
-    gap: 1em;
     width: 100%;
 `
 
