@@ -4,7 +4,7 @@ import Daily from './Daily'
 import { StyledForecast, Header, Heading, Buttons, ForecastContainer } from '../styles/ForecastStyles'
 
 
-const Forecast = ({ hourly, daily, forecastData }) => {
+const Forecast = ({ hourly, forecastData }) => {
 
   const [forecast, setForecast] = useState('hourly')
 

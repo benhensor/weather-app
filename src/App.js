@@ -71,7 +71,7 @@ function App() {
 					units={units}
 					setUnits={setUnits}
 				/>
-				<Forecast hourly={weather.hourly} daily={weather.daily} forecastData={forecastData} />
+				<Forecast hourly={weather.hourly} forecastData={forecastData} />
 				<Footer />
 			</Container>
 		</Main>
