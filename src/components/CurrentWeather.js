@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import 'weather-icons/css/weather-icons.min.css'
-import * as d3 from 'd3'
 import { formatToLocalTime, mapOWNIconToWeatherIcons } from '../utils/Utils'
 import { ReactComponent as UpArrow } from '../assets/wi-direction-up.svg'
 import { ReactComponent as Humidity } from '../assets/wi-humidity.svg'
@@ -9,6 +8,10 @@ import { ReactComponent as Sunrise } from '../assets/wi-sunrise.svg'
 import { ReactComponent as Sunset } from '../assets/wi-sunset.svg'
 import { ReactComponent as Thermometer } from '../assets/wi-thermometer.svg'
 import { ReactComponent as Barometer } from '../assets/wi-barometer.svg'
+import {
+	createUnifiedTemperatureScale,
+	getBackgroundColor,
+} from '../utils/TemperatureBackgroundColor'
 import {
 	StyledCurrentWeather,
 	CurrentConditions,
@@ -24,24 +27,6 @@ import {
 	DetailRow,
 	DetailBlock,
 } from '../styles/CurrentWeatherStyles'
-
-const createUnifiedTemperatureScale = () => {
-	const celsiusRange = [-10, 0, 10, 15, 20, 25, 30, 35, 40]
-	const colorRange = [
-		'#4a90e2',
-		'#7fb3d5',
-		'#e4f5ff',
-		'#f7dc6f',
-		'#eb984e',
-		'#f25a14',
-		'#cb4335',
-	]
-	return d3.scaleLinear().domain(celsiusRange).range(colorRange)
-}
-
-const getBackgroundColor = (temp, scale) => {
-	return scale(temp)
-}
 
 export default function CurrentWeather({
 	weather: {

@@ -10,9 +10,11 @@ export default function Footer() {
 
 	return (
 		<APICount>
-			<p>API calls: {apiCallCount}</p>
-			<Separator>|</Separator>
-			<p>Copyright &copy; {currentYear}</p>
+			<div>
+				<p>API calls: {apiCallCount}</p>
+				<Separator>|</Separator>
+				<p>Copyright &copy; {currentYear}</p>
+			</div>
 		</APICount>
 	)
 }

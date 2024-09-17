@@ -4,16 +4,25 @@ const APICount = styled.footer`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #77777775;
-    border-radius: 1rem;
-	font-size: 0.7em;
+    background-color: var(--bg-md);
+    border-radius: var(--sm);
+	font-size: var(--fs-xs);
 	width: 100%;
 	height: 100%;
-	padding: 1em 0;
+	padding: var(--xs);
+    > div {
+        flex: 1;
+        background-color: var(--bg-lt);
+        border-radius: var(--xs);
+        padding: var(--sm);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 `
 
 const Separator = styled.p`
-    margin: 0 0.5rem;
+    margin: 0 var(--xs);
 `
 
 export { APICount, Separator }

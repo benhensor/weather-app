@@ -4,7 +4,7 @@ const StyledSearch = styled.section`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5em;
+    padding: var(--sm);
     background-color: #77777775;
     border-radius: 1rem;
 `

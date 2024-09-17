@@ -1,29 +1,42 @@
 import React from 'react'
-import 'weather-icons/css/weather-icons.min.css';
+import 'weather-icons/css/weather-icons.min.css'
 import { mapOWNIconToWeatherIcons } from '../utils/Utils'
 import {
-  HourlyForecast,
-  HourlyForecastContainer,
-  Hour,
-  WeatherIcon,
+	createUnifiedTemperatureScale,
+	getBackgroundColor,
+} from '../utils/TemperatureBackgroundColor'
+import {
+	HourlyForecast,
+	HourlyForecastContainer,
+	Hour,
+	WeatherIcon,
+	Temp,
 } from '../styles/HourlyStyles'
 
-
 const Hourly = ({ hourly }) => {
+  const scale = createUnifiedTemperatureScale()
 
-  return (
-    <HourlyForecast className="hourly-forecast-container">
-        <HourlyForecastContainer>
-          {hourly.map((item, index) => (
+	return (
+		<HourlyForecast>
+			<HourlyForecastContainer>
+				{hourly.map((item, index) => {
+          const bgColor = getBackgroundColor(item.temp, scale)
+          return (
             <Hour key={index}>
               <p>{item.title}</p>
-              <WeatherIcon className={`wi ${mapOWNIconToWeatherIcons(item.icon)}`} />
-              <p>{`${item.temp.toFixed()}°`}</p>
+              <WeatherIcon
+                className={`wi ${mapOWNIconToWeatherIcons(
+                  item.icon
+                )}`}
+                $color={bgColor}
+              />
+              <Temp>{`${item.temp.toFixed()}°`}</Temp>
             </Hour>
-          ))}
-        </HourlyForecastContainer>
-    </HourlyForecast>
-  )
+          )
+        })}
+			</HourlyForecastContainer>
+		</HourlyForecast>
+	)
 }
 
 export default Hourly

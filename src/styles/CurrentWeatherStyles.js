@@ -2,13 +2,13 @@ import styled from 'styled-components'
 
 const StyledCurrentWeather = styled.section`
 	display: flex;
-	background-color: #77777775;
-	border-radius: 1rem;
-	padding: 0.5em;
+	background-color: var(--bg-md);
+	border-radius: var(--sm);
+	padding: var(--xs);
 	img {
 		width: 2em;
 		height: 2em;
-		margin: 0 0.5rem;
+		margin: 0 var(--xs);
 	}
 `
 
@@ -22,19 +22,19 @@ const CurrentConditions = styled.div`
 
 const Location = styled.p`
 	position: absolute;
-	top: 0.5em;
-	left: 0.5em;
-	font-size: 2.6rem;
-	color: #fff;
+	top: .4em;
+	left: .4em;
+	font-size: var(--fs-lg);
+	color: var(--white);
+	z-index: 1000;
 `
 
 const DateAndTime = styled.p`
 	position: absolute;
-	bottom: 1em;
-	left: 1em;
+	bottom: .8em;
+	left: .8em;
 	color: #fff;
-	font-size: 0.7em;
-	width: 100%;
+	font-size: var(--fs-xs);
 `
 
 const Display = styled.div`
@@ -42,10 +42,11 @@ const Display = styled.div`
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
-	padding: 2em 0;
+	padding: var(--lg) 0;
 	width: 100%;
-	background-color: #77777775;
-	border-radius: 1rem;
+	background-color: var(--bg-lt);
+	border-top-left-radius: var(--xs);
+	border-top-right-radius: var(--xs);
 `
 
 const Conditions = styled.div`
@@ -53,14 +54,14 @@ const Conditions = styled.div`
 	justify-content: center;
 	align-items: flex-start;
 	position: relative;
-	margin-top: 2em;
+	margin-top: var(--md);
 	z-index: 1;
 	height: 100%;
 	p {
 		position: absolute;
-		top: 0.5em;
-		left: 1em;
-		font-size: 2.6rem;
+		top: .4em;
+		left: .8em;
+		font-size: var(--fs-xl);
 		color: ${(props) => props.$bgColor};
 	}
 `
@@ -78,27 +79,27 @@ const Temperature = styled.div`
 	font-weight: 300;
 	background-color: ${(props) => props.$bgColor};
 	border-radius: 50%;
-	width: 2.5em;
-	height: 2.5em;
+	width: 2.4em;
+	height: 2.4em;
 	box-shadow: 0.2em 0.2em 0.1em #00000050;
 	p {
-		color: #333;
+		color: var(--grey);
 	}
 `
 
 const TempControls = styled.div`
 	position: absolute;
-	top: 1em;
-	right: 1em;
+	top: .8em;
+	right: .8em;
 	button {
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		border: none;
-		background: #777;
-		padding: 0.5em;
+		background: var(--dk-grey);
+		padding: var(--xs);
 		border-radius: 50%;
-		color: #ffffff;
+		color: var(--white);
 		width: 2.5em;
 		height: 2.5em;
 		cursor: pointer;
@@ -106,31 +107,32 @@ const TempControls = styled.div`
 `
 
 const TempIcon = styled.i`
-	font-size: 3rem;
-	color: #fff;
+	font-size: var(--fs-xl);
+	color: var(--white);
 `
 
 const WeatherIcon = styled.i`
 	font-size: 7em;
-	color: #fff;
+	color: var(--white);
 	margin-top: 0.5em;
-	margin-left: 0.4em;
+	margin-left: 0.66em;
 `
 
 const Details = styled.div`
-	padding: 2em 0.5em;
+	padding: var(--lg) var(--xs);
 	display: flex;
 	flex-direction: column;
 	gap: 2em;
 	width: 100%;
-	background-color: #77777775;
-	border-radius: 1rem;
-	margin-top: 0.5em;
+	background-color: var(--bg-lt);
+	border-bottom-left-radius: var(--xs);
+	border-bottom-right-radius: var(--xs);
+	margin-top: var(--xs);
 `
 
 const DetailRow = styled.div`
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 	width: 100%;
 `
 
@@ -144,7 +146,7 @@ const DetailBlock = styled.div`
 		width: 4.5em;
 	}
 	span {
-		color: #fff;
+		color: var(--white);
 	}
 `
 

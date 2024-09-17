@@ -1,5 +1,5 @@
-import { fetchWeatherData } from '../api/API'
-import { formatWeather, formatForecast } from './WeatherFormatter'
+import { fetchWeatherData, fetchForecastData } from '../api/API'
+import { formatWeather, formatForecast, formatForecastData } from './WeatherFormatter'
 
 let apiCallCount = localStorage.getItem('apiCallCount') || 0
 
@@ -23,6 +23,15 @@ export const getFormattedWeatherData = async (searchParams) => {
 	return { ...formattedCurrentWeather, ...formattedForecastWeather }
 }
 
-export { apiCallCount }
+export const getFormattedForecastData = async (searchParams) => {
+	const { lat, lon } = searchParams
+	const formattedForecastWeather = await fetchForecastData({
+		lat,
+		lon,
+		units: searchParams.units,
+	}).then(formatForecastData)
 
-export default getFormattedWeatherData;
+	return formattedForecastWeather
+}
+
+export { apiCallCount }

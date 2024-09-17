@@ -6,9 +6,9 @@ const StyledForecast = styled.section`
   flex-direction: column;
   align-items: center;
   position: relative;
-  background-color: #77777775;
-  border-radius: 1rem;
-  padding: 0.5em;
+  background-color: var(--bg-md);
+  border-radius: var(--sm);
+  padding: var(--xs);
 `
 
 const Header = styled.div`
@@ -16,15 +16,16 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-bottom: .5em;
-  background-color: #77777775;
-  border-radius: .5em;
-  padding: 0.5em;
+  margin-bottom: var(--xs);
+  background-color: var(--bg-lt);
+  border-top-left-radius: var(--xs);
+	border-top-right-radius: var(--xs);
+  padding: var(--xs) var(--sm);
 `
 
 const Heading = styled.p`
-  font-size: 2rem;
-  color: #fff;
+  font-size: var(--fs-lg);
+  color: var(--white);
 `
 
 const Buttons = styled.div`
@@ -32,20 +33,20 @@ const Buttons = styled.div`
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  gap: 0.5em;
+  gap: var(--xs);
   button {
     border: none;
     background: none;
-    color: #fff;
-    font-size: 1.6rem;
-    padding: 0.5em 1em;
-    border-radius: 0.5rem;
+    color: var(--white);
+    font-size: var(--fs-md);
+    padding: var(--sm);
+    border-radius: var(--xs);
     cursor: pointer;
     &:hover {
-      background-color: #ffffff25;
+      background-color: var(--bg-dk);
     }
     &.selected {
-      background-color: #ffffff25;
+      color: var(--blue);
     }
   
   }

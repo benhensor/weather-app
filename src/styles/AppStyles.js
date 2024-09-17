@@ -16,8 +16,8 @@ const Container = styled.div`
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	gap: 0.5em;
-	padding: 0.5em;
+	gap: var(--xs);
+	padding: var(--xs);
 `
 
 export { Main, Container }

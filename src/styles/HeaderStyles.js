@@ -6,15 +6,15 @@ const StyledHeader = styled.header`
 	align-items: center;
 	width: 100%;
 	height: 100%;
-	padding-right: 1em;
+	padding-right: var(--sm);
 `
 
 const DateAndTime = styled.p`
-	font-size: 0.7em;
+	font-size: var(--fs-xxs);
 	width: 100%;
 	height: 100%;
 	text-align: right;
-	padding: 0.5em 0;
+	padding: var(--xs) 0;
 `
 
 export { StyledHeader, DateAndTime }
